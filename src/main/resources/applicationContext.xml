@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+
+    <!-- param.properties, Properties属性注入 -->
+    <bean id="globalParam" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" value="classpath:param.properties" />
+    </bean>
+
+
+
+
+
+    <!--************************* Spring Application Start *************************-->
+
+    <!-- 启动@AspectJ支持 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 设置自动搜索目录 -->
+    <context:component-scan base-package="com.lanxi"/>
+
+    <!--************************* Spring Application End *************************-->
+
+
+
+</beans>
