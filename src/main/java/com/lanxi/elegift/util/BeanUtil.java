@@ -116,4 +116,5 @@ public class BeanUtil implements Serializable {
 		}
 		return null;
 	}
+
 }

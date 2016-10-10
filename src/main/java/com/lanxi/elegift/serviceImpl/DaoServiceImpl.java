@@ -235,5 +235,4 @@ public class DaoServiceImpl implements DaoService {
 	public String getSpmcBySpbh(String spbh) {
 		return doThin.getSpmcBySpbh(spbh);
 	}
-	
 }

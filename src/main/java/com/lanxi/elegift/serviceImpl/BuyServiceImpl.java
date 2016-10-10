@@ -106,29 +106,32 @@ public class BuyServiceImpl implements BuyService {
 				sms.setTradeTime(reqBean.getTradeTime());
 				sms.setOrderId(reqBean.getOrderId().replaceFirst("40","10"));
 				sms.setTdId("1");
-				//----------------------------------------------------				
-//				int index=0;
-//				StringBuilder temp=new StringBuilder();
-//				temp.append("您收到的电子券的串码为:");
-//				for(Mcht each:resBean.getObject())
-//					temp.append("串码"+(index++)+":"+each.getCode()+"截止日期:"+each.getEndTime());
-//				temp.append("请及时兑换,以免过期!");
-//				sms.setContent(temp.toString());
-				//-----------------------------------------------------
 				sms.setContent(getSmsContent(baowen,resBean));	
-				//-----------------------------------------------------
 				logger.info("准备发送短信,内容为:"+sms.getContent());
 				SignUtil.signSms(sms);
 				String rs=BeanUtil.sendSms(sms);
-	
-				if(rs!=null&&!((JSONObject)JSONObject.parseObject(rs)).get("retCode").equals("0000")){
-					sms.setTdId("2");
-					SignUtil.signSms(sms);
-					rs=BeanUtil.sendSms(sms);
-				}
 				if(rs!=null&&((JSONObject)JSONObject.parseObject(rs)).get("retCode").equals("0000"))
+				{
 					logger.info("短信发送成功");
-				else new EleGiftException("短信发送失败"+rs);
+				}else {
+					logger.info("尝试重发短信");
+					{
+						sms.setTdId("1");
+						SignUtil.signSms(sms);
+						rs=BeanUtil.sendSms(sms);
+						if(rs!=null&&!((JSONObject)JSONObject.parseObject(rs)).get("retCode").equals("0000")){
+							sms.setTdId("2");
+							SignUtil.signSms(sms);
+							rs=BeanUtil.sendSms(sms);
+						}
+						if(rs!=null&&((JSONObject)JSONObject.parseObject(rs)).get("retCode").equals("0000"))
+						{
+							logger.info("短信发送成功");
+						}else {
+							new EleGiftException("短信发送失败"+rs);
+						}
+					}
+				}
 			}
 		} catch (UnsupportedEncodingException e) {
 			new EleGiftException("响应过程中发生错误",e);
