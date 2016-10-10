@@ -65,7 +65,7 @@ public class BuyServiceImpl implements BuyService {
 				resBean=ParseUtil.getResBean(jStr);
 			} catch (EleGiftException e) {
 					resBean.setRetCode("9999");
-					resBean.setRetMsg(e.getMessage());
+					resBean.setRetMsg("系统错误请联系管理员!");
 					new EleGiftException("二次请求错误",e);
 				}
 			}
