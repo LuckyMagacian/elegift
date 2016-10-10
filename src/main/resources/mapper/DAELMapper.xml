@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.elegift.dao.DoDAEL">
+	<insert id="add" parameterType="com.lanxi.elegift.bean.in.OrderInfoBean">
+		insert into JFDH_DAEL 
+		(
+		jgfse,qdfse,bwbh,
+		qdbh,fqjgh,qsrq,
+		jyxh,jsjgh,dqh,
+		jyrq,jysj,ptlsh,
+		sjhm,yhxm,splx,
+		spbh,spsl,dxcm,
+		sflsh,jyzt,sfxym,
+		sfxyx,xym,xyxx,
+		dzzt,beiz)
+		
+		values(
+		#{jgfse},#{qdfse},#{bwbh},
+		#{qdbh},#{fqjgh},#{qsrq},
+		#{jyxh},#{jsjgh},#{dqh},
+		#{jyrq},#{jysj},#{ptlsh},
+		#{sjhm},#{yhxm},#{splx},
+		#{spbh},#{spsl},#{dxcm},
+		#{sflsh},#{jyzt},#{sfxym},
+		#{sfxyx},#{xym},#{xyxx},
+		#{dzzt},#{beiz})
+	</insert>
+	<update id="update" parameterType="com.lanxi.elegift.bean.in.OrderInfoBean">
+		update JFDH_DAEL set
+		jgfse=#{jgfse},qdfse=#{qdfse},bwbh=#{bwbh},
+		jsjgh=#{jsjgh},dqh=#{dqh},jysj=#{jysj},
+		sjhm=#{sjhm},yhxm=#{yhxm},splx=#{splx},
+		spsl=#{spsl},dxcm=#{dxcm},sflsh=#{sflsh},
+		ptlsh=#{ptlsh},jyzt=#{jyzt},sfxym=#{sfxym},
+		sfxyx=#{sfxyx},xym=#{xym},xyxx=#{xyxx},
+		dzzt=#{dzzt},beiz=#{beiz},spbh=#{spbh},
+		qdbh=#{qdbh},qsrq=#{qsrq}
+		where fqjgh=#{fqjgh} and jyxh=#{jyxh} and jyrq=#{jyrq}
+	</update>
+	<select id="getOrderInfoBySomeInfo" parameterType="com.lanxi.elegift.bean.in.OrderInfoBean" resultType="com.lanxi.elegift.bean.in.OrderInfoBean">
+		select 
+		jgfse,qdfse,bwbh,
+		qdbh,fqjgh,qsrq,
+		jyxh,jsjgh,dqh,
+		jyrq,jysj,ptlsh,
+		sjhm,yhxm,splx,
+		spbh,spsl,dxcm,
+		sflsh,jyzt,sfxym,
+		sfxyx,xym,xyxx,
+		dzzt,beiz 
+		from JFDH_DAEL where jyxh=#{jyxh} and jyrq=#{jyrq} and fqjgh=#{fqjgh}
+	</select>
+	
+</mapper>	
