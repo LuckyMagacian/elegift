@@ -107,7 +107,7 @@ public class TestService {
 					for(int i=0;i<1;i++){
 					String rs=HttpUtil.postXml(xml);
 					System.out.println(Thread.currentThread().getName()+"第"+i+"次:");
-					//System.out.println(rs);
+					System.out.println(rs);
 					}
 				} catch (EleGiftException e) {
 					e.printStackTrace();
