@@ -223,7 +223,7 @@ public class HttpUtil implements Serializable {
 	public static String postXml(String xml,String charset) throws EleGiftException{
 		try {
 			byte[] bytes=xml.getBytes(charset);
-			URL url=new URL(ConfUtil.getBackUrl());
+			URL url=new URL(ConfUtil.get("localUrl"));
 			HttpURLConnection conn=(HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
