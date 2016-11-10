@@ -18,12 +18,12 @@ import org.apache.log4j.PropertyConfigurator;
 public class Log4jServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		System.err.println("log4j init----");
+		System.out.println("log4j init----");
 		//从ServlcetConfig中获取 配置文件相对路径 参数
 		String location=config.getInitParameter("location");
 		//判断参数是否存在
 		if(location==null||location.trim().equals("")){
-			System.err.println("no init file----");
+			System.out.println("no init file----");
 			//调用默认配置
 			BasicConfigurator.configure(); 
 			return;
@@ -40,13 +40,13 @@ public class Log4jServlet extends HttpServlet {
 			//获取初始化参数 中webapproot
 			String webroot=context.getInitParameter("webAppRoot");
 			//替换webapproot为项目路径
-			System.setProperty(webroot,webappPath);
-			System.err.println("init log4j by file "+logConf);
+			System.setProperty("webAppRoot",webappPath);
+			System.out.println("init log4j by file "+logConf);
 			//使用配置文件初始化log4j
 			PropertyConfigurator.configure(logConf);
 		}else{
 			//使用默认配置
-			System.err.println("config file not exists");
+			System.out.println("config file not exists");
 			BasicConfigurator.configure(); 
 		}
 		//记录日志

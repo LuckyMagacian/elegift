@@ -105,7 +105,7 @@ public class BuyServiceImpl implements BuyService {
 				sms.setTradeDate(reqBean.getTradeDate());
 				sms.setTradeTime(reqBean.getTradeTime());
 				sms.setOrderId(reqBean.getOrderId().replaceFirst("40","10"));
-				sms.setTdId("1");
+				sms.setTdId("2");
 				sms.setContent(getSmsContent(baowen,resBean));	
 				logger.info("准备发送短信,内容为:"+sms.getContent());
 				SignUtil.signSms(sms);
@@ -116,7 +116,7 @@ public class BuyServiceImpl implements BuyService {
 				}else {
 					logger.info("尝试重发短信");
 					{
-						sms.setTdId("1");
+						sms.setTdId("2");
 						SignUtil.signSms(sms);
 						rs=BeanUtil.sendSms(sms);
 						if(rs!=null&&!((JSONObject)JSONObject.parseObject(rs)).get("retCode").equals("0000")){

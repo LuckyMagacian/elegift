@@ -200,7 +200,6 @@ public class DaoServiceImpl implements DaoService {
 	/**
 	 * 验证交易序号是否已存在
 	 */
-	@Override
 	public int checkOrder(BaoWen baowen) {
 		OrderInfoBean some=new OrderInfoBean();
 		ReqHead head=(ReqHead) baowen.getHead();
@@ -231,7 +230,6 @@ public class DaoServiceImpl implements DaoService {
 	public String getJgmcByJgdm(String jgdm){
 		return doBrch.getJgmcByJgdm(jgdm);
 	}
-	@Override
 	public String getSpmcBySpbh(String spbh) {
 		return doThin.getSpmcBySpbh(spbh);
 	}

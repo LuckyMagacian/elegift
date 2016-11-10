@@ -21,45 +21,6 @@
   		<load-on-startup>1</load-on-startup>
   	</servlet>
   	   
-    <!-- 编码过虑 -->
-    <filter>
-        <filter-name>encodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!-- 解决HTTP PUT请求Spring无法获取请求参数的问题 -->
-    <filter>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <servlet-name>SpringMVC</servlet-name>
-    </filter-mapping>
-
-  	
-  	<!-- 测试Servlet
-	<servlet>
-		<servlet-name>test</servlet-name>
-		<servlet-class>com.lanxi.elegift.servlet.TestServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>test</servlet-name>
-		<url-pattern>/*</url-pattern>
-	</servlet-mapping>
-  	 -->
   	<!-- spring分发器 -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
@@ -68,7 +29,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:xml/spring.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>

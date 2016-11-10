@@ -88,13 +88,13 @@ public class TestService {
 						+ "<DES>1000000000000000</DES>"
 						+ "<MsgID>20010001</MsgID>"
 						+ "<Reserve>我就试试</Reserve>"
-						+ "<Sign>ab48b00317e187e32bb98</Sign>"
+						+ "<Sign>a24f03c89cee160ddebbdacd9ff51411</Sign>"
 						+ "</HEAD>"
 					+ "<MSG>"
 						+ "<Phone>15068610940</Phone>"
-						+ "<SkuCode>5004</SkuCode>"
-						+ "<Type>50</Type>"
-						+ "<Count>1</Count>"
+						+ "<SkuCode>3088</SkuCode>"
+						+ "<Type>30</Type>"
+						+ "<Count>5</Count>"
 						+ "<NeedSend>0</NeedSend>"
 						+ "<Remark>我就试试</Remark>"
 					+ "</MSG>"
@@ -106,7 +106,7 @@ public class TestService {
 					for(int i=0;i<1;i++){
 					String rs=HttpUtil.postXml(xml);
 					System.out.println(Thread.currentThread().getName()+"第"+i+"次:");
-					//System.out.println(rs);
+					System.out.println(rs);
 					}
 				} catch (EleGiftException e) {
 					e.printStackTrace();
