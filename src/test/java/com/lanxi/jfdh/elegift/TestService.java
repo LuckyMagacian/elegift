@@ -5,7 +5,6 @@ package com.lanxi.jfdh.elegift;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.junit.Test;
 
 import com.lanxi.elegift.bean.in.EleGiftException;

@@ -206,7 +206,8 @@ public class BuyServiceImpl implements BuyService {
 			smsTemplate=ConfUtil.get(jgmc);
 		String[] params=smsTemplate.split("\\|{2}");
 		content.append(params[0]).append(spmc);
-		if(Integer.parseInt(count)>1){
+		// TODO 统一
+		if(Integer.parseInt(count)>0){
 			content.append(count+"份，串码:");
 			List<Mcht> tempList=res.getObject();
 			for(int i=0;i<tempList.size();i++){
