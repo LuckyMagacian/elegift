@@ -169,7 +169,7 @@ public class SignUtil implements Serializable {
 				if(!each.getName().equals("sign"))
 					map.put(each.getName(), each.get(bean).toString());
 				}		
-		//  System.out.println(ParseUtil.getParamStr(map)+ConfUtil.getSmsKey());
+			System.out.println(ParseUtil.getParamStr(map)+ConfUtil.getSmsKey());
 		//	System.out.println("密钥:"+ConfUtil.getSmsKey());
 			String sign=md5LowerCase(ParseUtil.getParamStr(map)+ConfUtil.getSmsKey(),"utf-8");
 			bean.setSign(sign);

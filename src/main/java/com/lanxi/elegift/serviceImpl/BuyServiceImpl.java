@@ -137,6 +137,8 @@ public class BuyServiceImpl implements BuyService {
 			new EleGiftException("响应过程中发生错误",e);
 		} catch (EleGiftException e) {
 			new EleGiftException("响应过程中发生错误",e);
+		} catch (Exception e) {
+			new EleGiftException("发生错误", e);
 		}
 	}
 	/**

@@ -209,7 +209,7 @@ public class TestCase {
 		bean.setContent("您收到的电子券的串码为:串码0:4288967764截止日期:20161127串码1:8211379550截止日期:20161127请及时兑换,以免过期!");
 		bean.setTdId("1");
 		SignUtil.signSms(bean);
-		System.out.println(bean);
+//		System.out.println(bean);
 		System.out.println(BeanUtil.sendSms(bean));
 	}
 	@Test

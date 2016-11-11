@@ -38,10 +38,26 @@
 <util:properties id="dbconfig" location="classpath:properties/jdbc.properties"></util:properties>
 <!-- 数据库配置 -->
 <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
-	<property name="driverClassName" value="#{dbconfig.driverClassName}"></property>
-	<property name="url"			 value="#{dbconfig.url}"></property> 
-	<property name="username" 		 value="#{dbconfig.username}"></property>
-	<property name="password" 		 value="#{dbconfig.password}"></property>
+	<property name="driverClassName" 	value="#{dbconfig.driverClassName}"></property>
+	<property name="url"			 	value="#{dbconfig.url}"></property> 
+	<property name="username" 		 	value="#{dbconfig.username}"></property>
+	<property name="password" 		 	value="#{dbconfig.password}"></property>
+	<!--  
+	<property name="defaultAutoCommit" 	value="#{dbconfig.defaultAutoCommit}"></property>
+	<property name="logAbandoned" 		value="#{dbconfig.logAbandoned}"></property>
+	-->
+	<property name="maxActive"			value="#{dbconfig.maxActive}"></property>
+	<property name="maxIdle"			value="#{dbconfig.maxIdle}"></property>
+	<property name="maxWait"			value="#{dbconfig.maxWait}"></property>
+	<property name="timeBetweenEvictionRunsMillis"	value="#{dbconfig.timeBetweenEvictionRunsMillis}"></property>
+	<!-- 
+	<property name="removeAbandoned"	value="#{dbconfig.removeAbandoned}"></property>
+	<property name="removeAbandonedTimeout"	value="#{dbconfig.removeAbandonedTimeout}"></property>
+	 -->
+	<property name="validationQuery"	value="#{dbconfig.validationQuery}"></property>
+	<property name="testWhileIdle"		value="#{dbconfig.testWhileIdle}"></property>
+	<property name="testOnBorrow"		value="#{dbconfig.testOnBorrow}"></property>
+	<property name="testOnReturn"		value="#{dbconfig.testOnReturn}"></property>
 </bean>
 
 <!-- mybatis配置 -->

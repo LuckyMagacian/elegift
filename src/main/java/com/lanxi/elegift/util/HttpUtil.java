@@ -147,6 +147,7 @@ public class HttpUtil implements Serializable {
 	public static String postSms(SmsBean bean) throws EleGiftException{
 		Map<String, String> params=BeanUtil.getObjectParams(bean);
 		String param=ParseUtil.getParamStr(params);
+		System.out.println(param);
 		return postStr(param, ConfUtil.getSmsUrl(), "utf-8", "utf-8");	
 	}
 	/**

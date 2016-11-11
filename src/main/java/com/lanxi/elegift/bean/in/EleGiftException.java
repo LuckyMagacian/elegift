@@ -15,6 +15,6 @@ public class EleGiftException extends Exception implements Serializable {
 		super(errMsg, e);
 		logger.error("发生了一个错误:\n"+
 					 "错误源:"+getCause()+"\n"+
-					 "错误信息:"+errMsg);
+					 "错误信息:"+errMsg,e);
 	}
 }
