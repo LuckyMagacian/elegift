@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.stereotype.Service;
 
 import com.lanxi.elegift.bean.in.EleGiftException;
@@ -13,6 +14,7 @@ import com.lanxi.elegift.bean.in.OpenBean;
 import com.lanxi.elegift.bean.in.OrderInfoBean;
 import com.lanxi.elegift.bean.in.ReqBean;
 import com.lanxi.elegift.bean.in.ResBean;
+import com.lanxi.elegift.bean.in.SmsMod;
 import com.lanxi.elegift.bean.out.BaoWen;
 import com.lanxi.elegift.bean.out.Sku;
 import com.lanxi.elegift.bean.out.headbean.ReqHead;
@@ -24,6 +26,7 @@ import com.lanxi.elegift.dao.DoCHN;
 import com.lanxi.elegift.dao.DoCOMM;
 import com.lanxi.elegift.dao.DoDAEL;
 import com.lanxi.elegift.dao.DoOpen;
+import com.lanxi.elegift.dao.DoSmsMod;
 import com.lanxi.elegift.dao.DoThin;
 import com.lanxi.elegift.service.DaoService;
 import com.lanxi.elegift.util.ParseUtil;
@@ -47,6 +50,8 @@ public class DaoServiceImpl implements DaoService {
 	private DoThin doThin;
 	@Resource
 	private DoBrch doBrch;
+	@Resource
+	private DoSmsMod doSmsMod;
 	/**
 	 * 从数据库中取得Operate并生成签名
 	 * @param bean
@@ -232,5 +237,20 @@ public class DaoServiceImpl implements DaoService {
 	}
 	public String getSpmcBySpbh(String spbh) {
 		return doThin.getSpmcBySpbh(spbh);
+	}
+	@Override
+	public SmsMod getSmsMod(String branchId, String goodsId) {
+		SmsMod mod=new SmsMod();
+		mod.setBranchid(branchId);
+		mod.setGoodsid(goodsId);
+		List<SmsMod> result=doSmsMod.selectSmsMod(mod);
+		return result.isEmpty()?null:result.get(0);
+	}
+	@Override
+	public List<SmsMod> getSmsMods(String branchId) {
+		SmsMod mod=new SmsMod();
+		mod.setBranchid(branchId);
+		List<SmsMod> result=doSmsMod.selectSmsMod(mod);
+		return result.isEmpty()?null:result;
 	}
 }

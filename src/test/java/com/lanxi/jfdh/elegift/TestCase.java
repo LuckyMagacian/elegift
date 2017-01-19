@@ -15,6 +15,7 @@ import com.lanxi.elegift.bean.in.OrderInfoBean;
 import com.lanxi.elegift.bean.in.ReqBean;
 import com.lanxi.elegift.bean.in.ResBean;
 import com.lanxi.elegift.bean.in.SmsBean;
+import com.lanxi.elegift.bean.in.SmsMod;
 import com.lanxi.elegift.bean.out.BaoWen;
 import com.lanxi.elegift.bean.out.Sku;
 import com.lanxi.elegift.bean.out.headbean.Head;
@@ -30,6 +31,7 @@ import com.lanxi.elegift.util.HttpUtil;
 import com.lanxi.elegift.util.ParseUtil;
 import com.lanxi.elegift.util.SerialNumUtil;
 import com.lanxi.elegift.util.SignUtil;
+import com.lanxi.elegift.util.SqlUtil;
 import com.lanxi.elegift.util.TestUtil;
 import com.lanxi.elegift.util.TimeUtil;
 
@@ -226,5 +228,9 @@ public class TestCase {
 		List<String> list=Arrays.asList(strs);
 		System.out.println(list);
 		System.out.println(ConfUtil.get("3302104332051437"));
+	}
+	@Test
+	public void testSql(){
+		SqlUtil.createMapperFile(SmsMod.class,"JFDH_SMS_MOD");
 	}
 }

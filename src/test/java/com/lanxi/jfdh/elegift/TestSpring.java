@@ -1,5 +1,7 @@
 package com.lanxi.jfdh.elegift;
 
+import java.sql.Connection;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -7,13 +9,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lanxi.elegift.bean.in.OpenBean;
 import com.lanxi.elegift.bean.in.OrderInfoBean;
+import com.lanxi.elegift.bean.in.SmsMod;
 import com.lanxi.elegift.dao.DoBrch;
 import com.lanxi.elegift.dao.DoCHN;
 import com.lanxi.elegift.dao.DoCOMM;
 import com.lanxi.elegift.dao.DoDAEL;
 import com.lanxi.elegift.dao.DoOpen;
+import com.lanxi.elegift.dao.DoSmsMod;
 import com.lanxi.elegift.dao.DoThin;
+import com.lanxi.elegift.service.DaoService;
 import com.lanxi.elegift.util.ConfUtil;
+import com.lanxi.elegift.util.SqlUtilForDB;
 
 public class TestSpring {
 	private ApplicationContext ac;
@@ -66,8 +72,7 @@ public class TestSpring {
 	@Test
 	public void testDaoThin(){
 		DoThin dao=(DoThin) ac.getBean("doThin");
-		System.out.println(dao.getSplbBySpbh("5005"));
-		System.out.println(dao.getSpmcBySpbh("5005"));
+		System.out.println(dao.getMz("3021"));
 	}
 	@Test
 	public void testDaoOpen(){
@@ -79,5 +84,19 @@ public class TestSpring {
 		DoBrch dao=(DoBrch) ac.getBean("doBrch");
 		System.out.println(dao.getJgmcByJgdm("3311111111111110"));
 	}
-
+	@Test
+	public void testSmsModDao(){
+		DaoService dao=ac.getBean(DaoService.class);
+		System.out.println(dao.getSmsMod("1000000000000000", "1001"));
+	}
+	@Test
+	public void testGetBracnId(){
+		DoBrch dao=(DoBrch) ac.getBean("doBrch");
+		System.out.println(dao.getJgmcByJgdm("3311111111111110"));
+	}
+	@Test
+	public void test(){
+		Connection conn=SqlUtilForDB.getConnection();
+		System.out.println(conn);
+	}
 }

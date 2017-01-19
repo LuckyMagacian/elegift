@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.elegift.dao.DoThin">
+	<!-- 根据商品编号获取最低成本价的渠道商代码 -->
+	<select id="getSplbBySpbh" parameterType="String" resultType="String">
+		select splb from JFDH_THIN where spbh=#{spbh}
+	</select>
+	<!-- 根据商品编号获取商品名称 -->
+	<select id="getSpmcBySpbh" parameterType="String" resultType="String">
+		select spmc from JFDH_THIN where spbh=#{spbh}
+	</select>
+	<select id="getMz" parameterType="String" resultType="String">
+		select mz from JFDH_THIN where spbh=#{spbh}
+	</select>
+</mapper>	

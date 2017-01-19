@@ -1,10 +1,12 @@
 package com.lanxi.elegift.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.lanxi.elegift.bean.in.EleGiftException;
 import com.lanxi.elegift.bean.in.ReqBean;
 import com.lanxi.elegift.bean.in.ResBean;
+import com.lanxi.elegift.bean.in.SmsMod;
 import com.lanxi.elegift.bean.out.BaoWen;
 /**
  * dao操作的接口 以及需要借助dao才能完成的操作的接口
@@ -68,4 +70,7 @@ public interface DaoService extends Serializable {
 	 * @return
 	 */
 	public String getSpmcBySpbh(String spbh);
+	
+	public SmsMod getSmsMod(String branchId,String goodsId);
+	public List<SmsMod> getSmsMods(String branchId);
 }

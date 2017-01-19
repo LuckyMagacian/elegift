@@ -17,7 +17,9 @@ import com.lanxi.elegift.bean.in.OrderInfoBean;
 import com.lanxi.elegift.bean.in.ReqBean;
 import com.lanxi.elegift.bean.in.ResBean;
 import com.lanxi.elegift.bean.in.SmsBean;
+import com.lanxi.elegift.bean.in.SmsMod;
 import com.lanxi.elegift.bean.out.BaoWen;
+import com.lanxi.elegift.bean.out.ThinBean;
 import com.lanxi.elegift.bean.out.headbean.ReqHead;
 import com.lanxi.elegift.bean.out.msgbean.ReqMsg;
 import com.lanxi.elegift.service.BuyService;
@@ -107,6 +109,10 @@ public class BuyServiceImpl implements BuyService {
 				sms.setOrderId(reqBean.getOrderId().replaceFirst("40","10"));
 				sms.setTdId("2");
 				sms.setContent(getSmsContent(baowen,resBean));	
+				if(sms.getContent().equals("")||sms.getContent().isEmpty()){
+					logger.info("商品未找到短信模版,不再下发通知短信!");
+					return;
+				}
 				logger.info("准备发送短信,内容为:"+sms.getContent());
 				SignUtil.signSms(sms);
 				String rs=BeanUtil.sendSms(sms);
@@ -196,36 +202,67 @@ public class BuyServiceImpl implements BuyService {
 		String spmc=daoService.getSpmcBySpbh(spbh);
 		String count=((ReqMsg)baoWen.getMsg()).getCount();
 		String smsTemplate=null;
-		if(jgmc.trim().equals("华夏银行")){
-			if(spmc.contains("滴滴"))
-				smsTemplate=ConfUtil.get(jgmc+2);
-			else if(spmc.contains("惠多多"))
-				smsTemplate=ConfUtil.get(jgmc+3);
-			else if(spmc.contains("爱奇艺"))
-				smsTemplate=ConfUtil.get(jgmc+4);
-		}
-		else
-			smsTemplate=ConfUtil.get(jgmc);
-		String[] params=smsTemplate.split("\\|{2}");
-		content.append(params[0]).append(spmc);
-		// TODO 统一
-		if(Integer.parseInt(count)>0){
-			content.append(count+"份，串码:");
-			List<Mcht> tempList=res.getObject();
-			for(int i=0;i<tempList.size();i++){
-				content.append(tempList.get(i).getCode());
-				if(i<tempList.size()-1)
-					content.append("、");
+		
+		SmsMod smsMod=daoService.getSmsMod(jgdm, spbh);
+		logger.info("商品短信模版"+smsMod);
+		if (smsMod==null) {
+			logger.info("未找到商品对应短信模版!");
+			smsMod=daoService.getSmsMod(jgdm, spbh.substring(0,2));
+			logger.info("商品类别短信模版"+smsMod);
+			if(smsMod==null){
+				logger.info("该商品没有对应的短信模版!");
+				return "";
 			}
-			content.append("有效期至:"+tempList.get(0).getEndTime());
 		}
-		else {
-			content.append(params[1]);
-			content.append(res.getObject().get(0).getCode());
-			content.append(params[2]);
-			content.append(res.getObject().get(0).getEndTime());
+		smsTemplate=smsMod.getSmsmod();
+		smsTemplate=smsTemplate.replace("[goodsName]",daoService.getSpmcBySpbh(spbh));
+		smsTemplate=smsTemplate.replace("[goodsCount]",count);
+		
+		StringBuffer codes=new StringBuffer();
+		List<Mcht> tempCode=res.getObject();
+		for(int i=0;i<tempCode.size();i++){
+			codes.append(tempCode.get(i).getCode());
+			if(i<tempCode.size()-1)
+				codes.append("、");
 		}
-		content.append(params[params.length-1]);
-		return content.toString();
+		smsTemplate=smsTemplate.replace("[code]",codes);
+		smsTemplate=smsTemplate.replace("[overTime]",res.getObject().get(0).getEndTime());
+		
+		
+		
+//		if(jgmc.trim().equals("华夏银行")){
+//			if(spmc.contains("滴滴"))
+//				smsTemplate=ConfUtil.get(jgmc+2);
+//			else if(spmc.contains("惠多多"))
+//				smsTemplate=ConfUtil.get(jgmc+3);
+//			else if(spmc.contains("爱奇艺"))
+//				smsTemplate=ConfUtil.get(jgmc+4);
+//		}
+//		else
+//			smsTemplate=ConfUtil.get(jgmc);
+		
+		
+		
+//		String[] params=smsTemplate.split("\\|{2}");
+//		content.append(params[0]).append(spmc);
+//		// TODO 统一
+//		if(Integer.parseInt(count)>0){
+//			content.append(count+"份，串码:");
+//			List<Mcht> tempList=res.getObject();
+//			for(int i=0;i<tempList.size();i++){
+//				content.append(tempList.get(i).getCode());
+//				if(i<tempList.size()-1)
+//					content.append("、");
+//			}
+//			content.append("有效期至:"+tempList.get(0).getEndTime());
+//		}
+//		else {
+//			content.append(params[1]);
+//			content.append(res.getObject().get(0).getCode());
+//			content.append(params[2]);
+//			content.append(res.getObject().get(0).getEndTime());
+//		}
+//		content.append(params[params.length-1]);
+		return smsTemplate;
 	}
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.elegift.dao.DoCOMM">
+	<!-- 根据商品编号获取最低成本价的渠道商代码 -->
+	<select id="getQdsdmBySpbh" parameterType="String" resultType="String">
+		select qdsdm from JFDH_COMM where spbh=#{spbh} order by cbj limit 1
+	</select>
+	<!-- 更具商品编号获取成本价 -->
+	<select id="getCbjBySpbh" parameterType="String" resultType="String">
+		select min(cbj)from JFDH_COMM where spbh=#{spbh}
+	</select>
+	<!-- 根据渠道商商品编号获取商品编号 -->
+	<select id="getSpbhByQdsspbh" parameterType="String" resultType="String">
+		select spbh from JFDH_COMM where qdsspbh=#{qdsspbh}
+	</select>
+	<!-- 根据商品编号获取渠道商商品编号,若存在多个,取成本价最低的一个 -->
+	<select id="getQdsspbhBySpbh" parameterType="String" resultType="String">
+		select qdsspbh from JFDH_COMM where spbh=#{spbh} order by cbj limit 1
+	</select>
+</mapper>	

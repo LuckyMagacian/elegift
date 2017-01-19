@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.elegift.dao.SmsModDao">
+<insert id="addSmsMod" parameterType="com.lanxi.elegift.bean.in.SmsMod">
+insert into JFDH_SMS_MOD 
+(branchid,goodsid,smsmod,bak)
+values
+(#{branchid},#{goodsid},#{smsmod},#{bak})
+</insert>
+<insert id="addSmsModDefault" parameterType="com.lanxi.elegift.bean.in.SmsMod">
+insert into JFDH_SMS_MOD 
+(branchid,goodsid,smsmod,bak)
+values
+(DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<delete id="deleteSmsMod" parameterType="com.lanxi.elegift.bean.in.SmsMod">
+delete from JFDH_SMS_MOD
+<where>
+<if test="branchid != null"> and branchid = #{branchid}  </if>  
+<if test="goodsid != null"> and goodsid = #{goodsid}  </if>  
+<if test="smsmod != null"> and smsmod = #{smsmod}  </if>  
+<if test="bak != null"> and bak = #{bak}  </if>  
+</where>
+</delete>
+<update id="updateSmsMod" parameterType="com.lanxi.elegift.bean.in.SmsMod">
+update JFDH_SMS_MOD
+<set> 
+<if test="branchid != null">branchid = #{branchid},</if>  
+<if test="goodsid != null">goodsid = #{goodsid},</if>  
+<if test="smsmod != null">smsmod = #{smsmod},</if>  
+<if test="bak != null">bak = #{bak},</if>  
+</set>
+<where>
+<if test="branchid != null"> and branchid = #{branchid}  </if>  
+<if test="goodsid != null"> and goodsid = #{goodsid}  </if>  
+</where>
+</update>
+<select id="selectSmsMod" resultMap="smsModMap" parameterType="com.lanxi.elegift.bean.in.SmsMod" resultType="com.lanxi.elegift.bean.in.SmsMod">
+select
+branchid,goodsid,smsmod,bak
+from JFDH_SMS_MOD
+<where> 
+<if test="branchid != null"> and branchid = #{branchid}  </if>  
+<if test="goodsid != null"> and goodsid = #{goodsid}  </if>  
+<if test="smsmod != null"> and smsmod = #{smsmod}  </if>  
+<if test="bak != null"> and bak = #{bak}  </if>  
+</where>
+</select>
+<resultMap id="smsModMap" type="com.lanxi.elegift.bean.in.SmsMod">
+<result property="branchid" 			column="branchid"></result>
+<result property="goodsid" 			column="goodsid"></result>
+<result property="smsmod" 			column="smsmod"></result>
+<result property="bak" 			column="bak"></result>
+</resultMap>
+</mapper>
